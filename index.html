@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yash Tiwari | Full Stack & Java Developer Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --primary: #00d4ff;
+      --secondary: #ff006e;
+      --dark: #0a0e27;
+      --darker: #050810;
+      --card: #141829;
+      --text: #e0e0e0;
+      --text-muted: #a0a0a0;
+      --accent: #00f5ff;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 50%, #1a1f3a 100%);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Animated background elements */
+    .bg-blur {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blur-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%);
+      top: 10%;
+      left: -100px;
+      filter: blur(60px);
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .blur-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255, 0, 110, 0.1) 0%, transparent 70%);
+      bottom: 10%;
+      right: -150px;
+      filter: blur(80px);
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(30px); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header */
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.05) 0%, transparent 50%);
+      z-index: 0;
+    }
+
+    header > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .header-content {
+      max-width: 900px;
+      animation: slideUp 1s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    header h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700;
+      margin-bottom: 5px;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header .subtitle {
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 20px auto 35px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    .btns {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2px solid transparent;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--primary);
+      z-index: -1;
+      transition: left 0.3s ease;
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+      color: var(--darker);
+      box-shadow: 0 10px 40px rgba(0, 212, 255, 0.25);
+    }
+
+    .primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 50px rgba(0, 212, 255, 0.35);
+    }
+
+    .secondary {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      background: transparent;
+    }
+
+    .secondary:hover {
+      background: rgba(0, 212, 255, 0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+    }
+
+    /* Sections */
+    section {
+      padding: 100px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: 60px;
+      letter-spacing: -1px;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+
+    .section-wrapper {
+      width: 100%;
+    }
+
+    /* About Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
+      align-items: center;
+    }
+
+    .about-illustration {
+      width: 280px;
+      height: 280px;
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 0, 110, 0.1) 100%);
+      border-radius: 20px;
+      border: 2px solid rgba(0, 212, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-illustration img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+
+    .about-illustration::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 30% 30%, rgba(0, 212, 255, 0.2) 0%, transparent 0%),
+        radial-gradient(circle at 70% 70%, rgba(255, 0, 110, 0.1) 0%, transparent 0%);
+      animation: pulse 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      padding: 35px;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(0, 212, 255, 0.4);
+      box-shadow: 0 20px 50px rgba(0, 212, 255, 0.15);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .tag {
+      background: rgba(0, 212, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 50px;
+      color: var(--primary);
+      font-size: 0.9rem;
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+      background: rgba(0, 212, 255, 0.2);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    /* Projects Section - Carousel */
+    .projects-section {
+      padding: 100px 5%;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      margin-top: 50px;
+      padding: 0 15px;
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+
+    .projects-carousel {
+      display: flex;
+      gap: 25px;
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-behavior: smooth;
+      padding: 20px 0;
+      margin: -20px 0;
+    }
+
+    .projects-carousel::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .projects-carousel::-webkit-scrollbar-track {
+      background: rgba(0, 212, 255, 0.05);
+      border-radius: 10px;
+    }
+
+    .projects-carousel::-webkit-scrollbar-thumb {
+      background: rgba(0, 212, 255, 0.3);
+      border-radius: 10px;
+    }
+
+    .projects-carousel::-webkit-scrollbar-thumb:hover {
+      background: rgba(0, 212, 255, 0.5);
+    }
+
+    .project-card {
+      flex: 0 0 calc(33.333% - 17px);
+      min-width: 300px;
+      background: var(--card);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      border-radius: 16px;
+      padding: 35px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      cursor: grab;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-card:active {
+      cursor: grabbing;
+    }
+
+    .project-card:hover {
+      transform: translateY(-12px);
+      border-color: rgba(0, 212, 255, 0.3);
+      box-shadow: 0 15px 50px rgba(0, 212, 255, 0.3);
+    }
+
+    .project-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .project-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    .project-card p {
+      color: var(--text-muted);
+      flex-grow: 1;
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .project-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--primary);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      width: fit-content;
+    }
+
+    .project-btn:hover {
+      background: rgba(0, 212, 255, 0.1);
+      border-color: var(--primary);
+      gap: 12px;
+    }
+
+    .project-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .project-btn.live-demo {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 245, 255, 0.15) 100%);
+      border: 1px solid var(--primary);
+      color: var(--accent);
+      animation: glowPulse 2s ease-in-out infinite;
+    }
+
+    .project-btn.live-demo:hover {
+      background: linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(0, 245, 255, 0.25) 100%);
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { 
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+      }
+      50% { 
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+      }
+    }
+
+    /* Carousel Controls */
+    .carousel-controls {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .carousel-btn {
+      width: 50px;
+      height: 50px;
+      border: 2px solid var(--primary);
+      background: rgba(0, 212, 255, 0.1);
+      color: var(--primary);
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    .carousel-btn:hover {
+      background: var(--primary);
+      color: var(--darker);
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+    }
+
+    .carousel-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Contact Section */
+    .contact-box {
+      background: var(--card);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      border-radius: 16px;
+      padding: 50px;
+      text-align: center;
+      max-width: 600px;
+      margin: 50px auto 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(circle at 0% 0%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .contact-box > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-item {
+      margin: 20px 0;
+      font-size: 1.1rem;
+    }
+
+    .contact-item a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .contact-item a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .contact-item a:hover::after {
+      width: 100%;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(0, 212, 255, 0.1);
+      position: relative;
+      z-index: 1;
+      margin-top: 50px;
+    }
+
+    footer p {
+      font-size: 0.95rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .project-card {
+        flex: 0 0 calc(50% - 12.5px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      section {
+        padding: 80px 4%;
+      }
+
+      header h1 {
+        font-size: 2.5rem;
+      }
+
+      header .subtitle {
+        font-size: 1.3rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      .project-card {
+        flex: 0 0 100%;
+      }
+
+      .carousel-controls {
+        gap: 10px;
+      }
+
+      .carousel-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+      }
+
+      .contact-box {
+        padding: 35px;
+      }
+
+      .btns {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    .scroll-indicator svg {
+      width: 30px;
+      height: 30px;
+      stroke: var(--primary);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-content">
+        <h1>Yash Tiwari</h1>
+        <div class="subtitle">Full Stack & Java Developer</div>
+        <p>
+          Crafting scalable web applications and innovative Android solutions using 
+          modern technologies. Specialized in Spring Boot, React, and enterprise backend systems.
+        </p>
+        <div class="btns">
+          <a href="#projects" class="btn primary">View Projects</a>
+          <a href="#contact" class="btn secondary">Get In Touch</a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </header>
+
+    <!-- About Section -->
+    <section>
+      <h2>About Me</h2>
+      <div class="about-grid">
+        <div class="about-illustration">
+          <img src="profile.jpeg" alt="Yash Tiwari Profile">
+        </div>
+        <div>
+          <div class="card">
+            <h3>B.Tech CSE Student</h3>
+            <p>
+              Passionate developer focused on building production-grade full-stack applications 
+              with expertise in backend systems, responsive frontends, and mobile development. 
+              Experienced in designing scalable architectures and implementing best practices in software development.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section>
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="card">
+          <h3>Backend Development</h3>
+          <div class="skill-tags">
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Spring Securtiy</span>
+            <span class="tag">Spring Data JPA</span>
+            <span class="tag">Hibernate</span>
+            <span class="tag">Spring AI</span>
+            <span class="tag">JWT</span>
+            <span class="tag">JDBC</span>
+            <span class="tag">REST APIs</span>
+            <span class="tag">Microservices</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">Docker</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Frontend Development</h3>
+          <div class="skill-tags">
+            <span class="tag">React</span>
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Responsive Design</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Mobile Development</h3>
+          <div class="skill-tags">
+            <span class="tag">Android</span>
+            <span class="tag">Java</span>
+            <span class="tag">XML</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section with Carousel -->
+    <section class="projects-section" id="projects">
+      <h2>Featured Projects</h2>
+      
+      <div class="carousel-wrapper">
+        <div class="projects-carousel" id="projectsCarousel">
+          <div class="project-card">
+            <div class="project-icon">🌐</div>
+            <h3>Udhyog Invoice Web</h3>
+            <p>
+              Full-stack invoice and inventory management web application built with 
+              Spring Boot backend and React frontend. Features real-time stock management, 
+              invoice generation, and comprehensive reporting system.
+            </p>
+            <div class="project-buttons">
+              <a href="https://github.com/yashtiwari101/Udhyog-Invoice-Web" class="project-btn">
+                View Project →
+              </a>
+              <a href="https://udhyoginvoice.unaux.com/" class="project-btn live-demo">
+                🚀 Live Demo
+              </a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-icon">📦</div>
+            <h3>Udhyog Invoice Android</h3>
+            <p>
+              Mobile companion application for Udhyog Invoice system. Native Android app 
+              with Java and XML, featuring barcode scanning, offline functionality, 
+              and seamless synchronization with web platform.
+            </p>
+            <a href="https://github.com/yashtiwari101/Udhyog-Invoice-Android" class="project-btn">
+              View Project →
+            </a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-icon">🚂</div>
+            <h3>IRCTC Backend System</h3>
+            <p>
+              Console-based railway reservation system implementing advanced booking logic, 
+              cancellation management, and database operations using pure Java. 
+              Demonstrates core programming concepts and system design.
+            </p>
+            <a href="https://github.com/yashtiwari101/IRCTC-Console-Based-System" class="project-btn">
+              View Project →
+            </a>
+          </div>
+
+          <div class="project-card">
+            <div class="project-icon">⛅</div>
+            <h3>Weather Web App</h3>
+            <p>
+              Responsive weather forecasting application with real-time data integration. 
+              Built with React and external weather API, featuring location-based forecasts, 
+              visual weather indicators, and intuitive user interface.
+            </p>
+            <div class="project-buttons">
+              <a href="https://github.com/yashtiwari101/Weather-webapp" class="project-btn">
+                View Project →
+              </a>
+              <a href="#" class="project-btn live-demo">
+                🚀 Live Demo
+              </a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-icon">🎮</div>
+            <h3>Tic Tac Toe Game</h3>
+            <p>
+              Interactive web-based Tic Tac Toe game with AI opponent and player-vs-player modes. 
+              Built with React, featuring game state management, win detection, and smooth animations. 
+              Demonstrates React hooks and game logic implementation.
+            </p>
+            <div class="project-buttons">
+              <a href="https://github.com/yashtiwari101/TicTacToe" class="project-btn">
+                View Project →
+              </a>
+              
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-icon">⚖️</div>
+            <h3>BMI Calculator</h3>
+            <p>
+              Android BMI Calculator application developed with Java and XML. 
+              Features clean UI with instant calculations, unit conversion, 
+              and health category classification based on BMI results.
+            </p>
+            <a href="https://github.com/yashtiwari101/BMI-Calculator" class="project-btn">
+              View Project →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="prevBtn" onclick="scrollCarousel(-1)">←</button>
+        <button class="carousel-btn" id="nextBtn" onclick="scrollCarousel(1)">→</button>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Let's Connect</h2>
+      <div class="contact-box">
+        <div class="contact-item">
+          <strong>Email:</strong><br>
+          <a href="mailto:yashtiwarivbn@gmail.com">yashtiwarivbn@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <strong>GitHub:</strong><br>
+          <a href="https://github.com/yashtiwari101" target="_blank">yashtiwari101</a>
+        </div>
+        <div class="contact-item">
+          <strong>LinkedIn:</strong><br>
+          <a href="https://linkedin.com/in/yashtiwari2604" target="_blank">yashtiwari2604</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>© 2026 Yash Tiwari | Full Stack & Java Developer | All Rights Reserved</p>
+    </footer>
+  </div>
+
+  <script>
+    // Carousel functionality
+    const carousel = document.getElementById('projectsCarousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function scrollCarousel(direction) {
+      const cardWidth = carousel.querySelector('.project-card').offsetWidth;
+      const gap = 25;
+      const scrollAmount = cardWidth + gap;
+      
+      carousel.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+      });
+
+      updateCarouselButtons();
+    }
+
+    function updateCarouselButtons() {
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      const currentScroll = carousel.scrollLeft;
+
+      prevBtn.disabled = currentScroll <= 0;
+      nextBtn.disabled = currentScroll >= maxScroll - 10;
+    }
+
+    // Initialize button states
+    updateCarouselButtons();
+
+    // Update on window resize
+    window.addEventListener('resize', updateCarouselButtons);
+
+    // Smooth scroll on scroll event
+    carousel.addEventListener('scroll', updateCarouselButtons);
+
+    // Mobile touch support
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    carousel.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - carousel.offsetLeft;
+      scrollLeft = carousel.scrollLeft;
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+      isDown = false;
+    });
+
+    carousel.addEventListener('mouseup', () => {
+      isDown = false;
+    });
+
+    carousel.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - carousel.offsetLeft;
+      const walk = (x - startX) * 1;
+      carousel.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+
+</body>
+</html>
